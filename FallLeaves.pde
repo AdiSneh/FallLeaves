@@ -1,9 +1,9 @@
-PVector wind;
+PVector wind; // TODO
 Forest forest;
 
 void setup() {
-  size(770, 500);
-  forest = new Forest(50, width, height);
+  size(500, 300);
+  forest = new Forest(30, width, height);
 }
 
 void draw() {

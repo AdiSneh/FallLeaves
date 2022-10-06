@@ -10,7 +10,7 @@ class Leaf {
     position = new PVector(x, y);
     size = new PVector(LEAF_SIZE.x, LEAF_SIZE.y);
     color_ = color(0, 255, 100);
-    angle = 0;  // TODO
+    angle = random(radians(-10), radians(10));
   }
   
   void run() {
