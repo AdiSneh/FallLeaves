@@ -1,5 +1,6 @@
 class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
+  color MAX_LEAF_COLOR = color(100, 50, 10);
   
   PVector position;
   PVector size;
@@ -9,8 +10,8 @@ class Leaf {
   Leaf(float x, float y) {
     position = new PVector(x, y);
     size = new PVector(LEAF_SIZE.x, LEAF_SIZE.y);
-    color_ = color(0, 255, 100);
-    angle = random(radians(-10), radians(10));
+    color_ = color(10, 180, 40);
+    angle = random(radians(-20), radians(20));
   }
   
   void run() {
@@ -29,18 +30,19 @@ class Leaf {
     
     pushMatrix();
     
+    translate(position.x, position.y);
     rotate(angle);
     
     beginShape(TRIANGLE_FAN);
-    vertex(position.x, position.y);
-    vertex(position.x, position.y - size.y);
-    vertex(position.x + size.x, position.y);
-    vertex(position.x, position.y + size.y);
-    vertex(position.x - size.x, position.y);
-    vertex(position.x, position.y - size.y);
+    vertex(0, 0);
+    vertex(0, -size.y);
+    vertex(+size.x, 0);
+    vertex(0, size.y);
+    vertex(-size.x, 0);
+    vertex(0, -size.y);
     // TODO: Make more intricate veins
     endShape();
-    
+        
     popMatrix();
   }
 }

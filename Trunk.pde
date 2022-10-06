@@ -1,13 +1,13 @@
 class Trunk {
   float MAX_BARK_INTERVAL = 5;
-  PVector SIZE = new PVector(30, 90);
+  PVector SIZE = new PVector(25, 90);
   color COLOR = color(100, 0, 50);
   
   PVector position;
   ArrayList<Number> barkIntervals;
   
   Trunk(float x, float y) {
-    position = new PVector(x - SIZE.x * 0.25, y);
+    position = new PVector(x - SIZE.x / 2, y);
     barkIntervals = new ArrayList<Number>();
     
     float barkWidth = 0;
