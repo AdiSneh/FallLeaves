@@ -1,7 +1,9 @@
 class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
   color INITIAL_LEAF_COLOR = color(0, 120, 10);
+  color INTERMEDIATE_LEAF_COLOR = color(190, 180, 0);
   color FINAL_LEAF_COLOR = color(100, 50, 10);
+  boolean isBeforeIntermediate = true;
   
   PVector position;
   PVector size;
@@ -21,22 +23,43 @@ class Leaf {
   }
   
   void update(float treeColorVariance) {
-    // TODO: Make the trees turn yellow first
-    
     float newRed = red(color_);
     float newGreen = green(color_);
     float newBlue = blue(color_);
-    if (red(color_) > red(FINAL_LEAF_COLOR)) {
-      newRed = red(color_) - random(max(0, treeColorVariance - 50), treeColorVariance);
+        
+    if (isBeforeIntermediate) {
+      if (red(color_) != red(INTERMEDIATE_LEAF_COLOR)) {
+        newRed = red(color_) + getRandomLeafColorVariance(treeColorVariance);
+      }
+      if (green(color_) != green(INTERMEDIATE_LEAF_COLOR)) {
+        newGreen = green(color_) + getRandomLeafColorVariance(treeColorVariance);
+      }
+      if (blue(color_) != blue(INTERMEDIATE_LEAF_COLOR)) {
+        newBlue = blue(color_) - getRandomLeafColorVariance(treeColorVariance);
+      }
+      
+      color_ = color(min(red(INTERMEDIATE_LEAF_COLOR), newRed), min(green(INTERMEDIATE_LEAF_COLOR), newGreen), max(blue(INTERMEDIATE_LEAF_COLOR), newBlue));
+      if (color_ == INTERMEDIATE_LEAF_COLOR) {
+        isBeforeIntermediate = false;
+      }
     }
-    if (green(color_) > green(FINAL_LEAF_COLOR)) {
-      newGreen = green(color_) - random(max(0, treeColorVariance - 10), treeColorVariance);
+    else {
+      if (red(color_) != red(FINAL_LEAF_COLOR)) {
+        newRed = red(color_) - getRandomLeafColorVariance(treeColorVariance);
+      }
+      if (green(color_) != green(FINAL_LEAF_COLOR)) {
+        newGreen = green(color_) - getRandomLeafColorVariance(treeColorVariance);
+      }
+      if (blue(color_) != blue(FINAL_LEAF_COLOR)) {
+        newBlue = blue(color_) + getRandomLeafColorVariance(treeColorVariance);
+      }
+      
+      color_ = color(max(red(FINAL_LEAF_COLOR), newRed), max(green(FINAL_LEAF_COLOR), newGreen), min(blue(FINAL_LEAF_COLOR), newBlue));
     }
-    if (blue(color_) > blue(FINAL_LEAF_COLOR)) {
-      newBlue = blue(color_) - random(max(0, treeColorVariance - 10), treeColorVariance);
-    }
-    
-    color_ = color(max(red(FINAL_LEAF_COLOR), newRed), max(green(FINAL_LEAF_COLOR), newGreen), max(blue(FINAL_LEAF_COLOR), newBlue));
+  }
+  
+  float getRandomLeafColorVariance(float treeColorVariance) {
+    return random(max(0, treeColorVariance - 50), treeColorVariance);
   }
   
   void render() {

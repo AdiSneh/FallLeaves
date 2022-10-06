@@ -20,7 +20,7 @@ class Tree {
       leaves.add(new Leaf(leafX, leafY));
     }
     
-    colorVarianceRate = random(1);
+    colorVarianceRate = random(1, 2);
   }
   
   void run() {
@@ -33,6 +33,6 @@ class Tree {
   
   void update() {
     colorVariance = abs(randomGaussian()) * colorVarianceRate;
-    colorVarianceRate *= 1.2;
+    colorVarianceRate *= 1.005;
   }
 }
