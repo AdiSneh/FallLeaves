@@ -5,6 +5,8 @@ class Tree {
   PVector position;
   ArrayList<Leaf> leaves;
   Trunk trunk;
+  float colorVariance;
+  float colorVarianceRate;
   
   Tree(float x, float y) {
     position = new PVector(x, y);
@@ -17,16 +19,20 @@ class Tree {
       float leafY = random(position.y - TREE_SIZE.y / 2, position.y + TREE_SIZE.y / 2);
       leaves.add(new Leaf(leafX, leafY));
     }
+    
+    colorVarianceRate = random(1);
   }
   
-  color getAverageColor() {
-    return 0;
-  }
-
   void run() {
+    update();
     trunk.run();
     for (Leaf leaf : leaves) {
-      leaf.run();
+      leaf.run(colorVariance);
     }
+  }
+  
+  void update() {
+    colorVariance = abs(randomGaussian()) * colorVarianceRate;
+    colorVarianceRate *= 1.2;
   }
 }

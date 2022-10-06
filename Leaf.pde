@@ -1,6 +1,7 @@
 class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
-  color MAX_LEAF_COLOR = color(100, 50, 10);
+  color INITIAL_LEAF_COLOR = color(0, 120, 10);
+  color FINAL_LEAF_COLOR = color(100, 50, 10);
   
   PVector position;
   PVector size;
@@ -10,17 +11,32 @@ class Leaf {
   Leaf(float x, float y) {
     position = new PVector(x, y);
     size = new PVector(LEAF_SIZE.x, LEAF_SIZE.y);
-    color_ = color(10, 180, 40);
+    color_ = INITIAL_LEAF_COLOR;
     angle = random(radians(-20), radians(20));
   }
   
-  void run() {
-    update();
+  void run(float treeColorVariance) {
+    update(treeColorVariance);
     render();
   }
   
-  // Method to update position
-  void update() {
+  void update(float treeColorVariance) {
+    // TODO: Make the trees turn yellow first
+    
+    float newRed = red(color_);
+    float newGreen = green(color_);
+    float newBlue = blue(color_);
+    if (red(color_) > red(FINAL_LEAF_COLOR)) {
+      newRed = red(color_) - random(max(0, treeColorVariance - 50), treeColorVariance);
+    }
+    if (green(color_) > green(FINAL_LEAF_COLOR)) {
+      newGreen = green(color_) - random(max(0, treeColorVariance - 10), treeColorVariance);
+    }
+    if (blue(color_) > blue(FINAL_LEAF_COLOR)) {
+      newBlue = blue(color_) - random(max(0, treeColorVariance - 10), treeColorVariance);
+    }
+    
+    color_ = color(max(red(FINAL_LEAF_COLOR), newRed), max(green(FINAL_LEAF_COLOR), newGreen), max(blue(FINAL_LEAF_COLOR), newBlue));
   }
   
   void render() {
