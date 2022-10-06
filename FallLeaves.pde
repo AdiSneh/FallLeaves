@@ -3,7 +3,7 @@ Forest forest;
 
 void setup() {
   size(770, 500);
-  forest = new Forest(5, width, height);
+  forest = new Forest(50, width, height);
 }
 
 void draw() {

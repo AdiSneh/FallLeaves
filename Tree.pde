@@ -1,6 +1,6 @@
 class Tree {
-  int NUM_LEAVES = 60;
-  PVector TREE_SIZE = new PVector(40, 60);
+  int NUM_LEAVES = 150;
+  PVector TREE_SIZE = new PVector(70, 90);
   
   PVector position;
   ArrayList<Leaf> leaves;

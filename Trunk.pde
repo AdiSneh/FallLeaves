@@ -1,6 +1,6 @@
 class Trunk {
   float MAX_BARK_INTERVAL = 5;
-  PVector SIZE = new PVector(15, 60);
+  PVector SIZE = new PVector(30, 90);
   color COLOR = color(100, 0, 50);
   
   PVector position;
