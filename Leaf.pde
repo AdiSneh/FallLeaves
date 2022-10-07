@@ -2,11 +2,11 @@ class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
   color GREEN_COLOR = color(0, 120, 10);
   color YELLOW_COLOR = color(190, 180, 0);
-  color BRIGHT_ORANGE_COLOR = color(254,204,92);
-  color DARK_ORANGE_COLOR = color(247,140,63);
-  color RED_COLOR = color(39,61,34);  // color(220, 180, 0);
-  color DARK_RED_COLOR = color(189,32,42);
-  color BROWN_COLOR = color(152,56,32); // color(100, 50, 10);
+  color BRIGHT_ORANGE_COLOR = color(254, 204, 92);
+  color DARK_ORANGE_COLOR = color(247, 140, 63);
+  color RED_COLOR = color(220, 180, 0);
+  color DARK_RED_COLOR = color(189, 32, 42);
+  color BROWN_COLOR = color(152, 56, 32);
   
   IntList colorStages;
   
