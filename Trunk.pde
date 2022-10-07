@@ -4,7 +4,7 @@ class Trunk {
   color COLOR = color(70, 30, 0);
   
   PVector position;
-  ArrayList<Number> barkIntervals;
+  ArrayList<Number> barkIntervals;  // TODO: Use FloatList
   
   Trunk(float x, float y) {
     position = new PVector(x - SIZE.x / 2, y);

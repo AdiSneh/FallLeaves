@@ -1,9 +1,11 @@
 class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
-  color INITIAL_LEAF_COLOR = color(0, 120, 10);
-  color INTERMEDIATE_LEAF_COLOR = color(190, 180, 0);
-  color FINAL_LEAF_COLOR = color(100, 50, 10);
-  boolean isBeforeIntermediate = true;
+  color GREEN_LEAF_COLOR = color(0, 120, 10);
+  color YELLOW_LEAF_COLOR = color(190, 180, 0);
+  color RED_LEAF_COLOR = color(220, 180, 0);
+  color BROWN_LEAF_COLOR = color(100, 50, 10);
+  
+  IntList colorStages;
   
   PVector position;
   PVector size;
@@ -13,8 +15,14 @@ class Leaf {
   Leaf(float x, float y) {
     position = new PVector(x, y);
     size = new PVector(LEAF_SIZE.x, LEAF_SIZE.y);
-    color_ = INITIAL_LEAF_COLOR;
+    color_ = GREEN_LEAF_COLOR;
     angle = random(radians(-20), radians(20));
+    
+    colorStages = new IntList();
+    colorStages.append(GREEN_LEAF_COLOR);
+    colorStages.append(YELLOW_LEAF_COLOR);
+    colorStages.append(RED_LEAF_COLOR);
+    colorStages.append(BROWN_LEAF_COLOR);
   }
   
   void run(float treeColorVariance) {
@@ -23,39 +31,43 @@ class Leaf {
   }
   
   void update(float treeColorVariance) {
-    float newRed = red(color_);
-    float newGreen = green(color_);
-    float newBlue = blue(color_);
-        
-    // TODO: Make this process more generic then add red as a third color
-    if (isBeforeIntermediate) {
-      if (red(color_) != red(INTERMEDIATE_LEAF_COLOR)) {
-        newRed = red(color_) + getRandomLeafColorVariance(treeColorVariance);
-      }
-      if (green(color_) != green(INTERMEDIATE_LEAF_COLOR)) {
-        newGreen = green(color_) + getRandomLeafColorVariance(treeColorVariance);
-      }
-      if (blue(color_) != blue(INTERMEDIATE_LEAF_COLOR)) {
-        newBlue = blue(color_) - getRandomLeafColorVariance(treeColorVariance);
-      }
+    if (colorStages.size() > 1) {
+      color previousColor = colorStages.get(0);
+      color targetColor = colorStages.get(1);
       
-      color_ = color(min(red(INTERMEDIATE_LEAF_COLOR), newRed), min(green(INTERMEDIATE_LEAF_COLOR), newGreen), max(blue(INTERMEDIATE_LEAF_COLOR), newBlue));
-      if (color_ == INTERMEDIATE_LEAF_COLOR) {
-        isBeforeIntermediate = false;
-      }
-    }
-    else {
-      if (red(color_) != red(FINAL_LEAF_COLOR)) {
-        newRed = red(color_) - getRandomLeafColorVariance(treeColorVariance);
-      }
-      if (green(color_) != green(FINAL_LEAF_COLOR)) {
-        newGreen = green(color_) - getRandomLeafColorVariance(treeColorVariance);
-      }
-      if (blue(color_) != blue(FINAL_LEAF_COLOR)) {
-        newBlue = blue(color_) + getRandomLeafColorVariance(treeColorVariance);
-      }
+      float newRed = red(color_);
+      float newGreen = green(color_);
+      float newBlue = blue(color_);
       
-      color_ = color(max(red(FINAL_LEAF_COLOR), newRed), max(green(FINAL_LEAF_COLOR), newGreen), min(blue(FINAL_LEAF_COLOR), newBlue));
+      if (red(color_) != red(targetColor)) {
+        if (red(targetColor) > red(previousColor)) {
+          newRed = min(red(targetColor), red(color_) + getRandomLeafColorVariance(treeColorVariance));
+        }
+        else {
+          newRed = max(red(targetColor), red(color_) - getRandomLeafColorVariance(treeColorVariance));
+        }
+      }
+      if (green(color_) != green(targetColor)) {
+        if (green(targetColor) > green(previousColor)) {
+          newGreen = min(green(targetColor), green(color_) + getRandomLeafColorVariance(treeColorVariance));
+        }
+        else {
+          newGreen = max(green(targetColor), green(color_) - getRandomLeafColorVariance(treeColorVariance));
+        }
+      }
+      if (blue(color_) != blue(targetColor)) {
+        if (blue(targetColor) > blue(previousColor)) {
+          newBlue = min(blue(targetColor), blue(color_) + getRandomLeafColorVariance(treeColorVariance));
+        }
+        else {
+          newBlue = max(blue(targetColor), blue(color_) - getRandomLeafColorVariance(treeColorVariance));
+        }
+      }
+      color_ = color(newRed, newGreen, newBlue);
+      
+      if (color_ == targetColor) {
+        colorStages.remove(0);
+      }
     }
   }
   
