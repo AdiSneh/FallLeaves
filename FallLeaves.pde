@@ -1,4 +1,4 @@
-PVector wind; // TODO
+PVector wind; // TODO - also make them fall at the end
 Forest forest;
 
 void setup() {

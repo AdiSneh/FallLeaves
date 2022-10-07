@@ -27,6 +27,7 @@ class Leaf {
     float newGreen = green(color_);
     float newBlue = blue(color_);
         
+    // TODO: Make this process more generic then add red as a third color
     if (isBeforeIntermediate) {
       if (red(color_) != red(INTERMEDIATE_LEAF_COLOR)) {
         newRed = red(color_) + getRandomLeafColorVariance(treeColorVariance);
