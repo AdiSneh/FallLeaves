@@ -1,9 +1,12 @@
 class Leaf {
   PVector LEAF_SIZE = new PVector(5, 10);
-  color GREEN_LEAF_COLOR = color(0, 120, 10);
-  color YELLOW_LEAF_COLOR = color(190, 180, 0);
-  color RED_LEAF_COLOR = color(220, 180, 0);
-  color BROWN_LEAF_COLOR = color(100, 50, 10);
+  color GREEN_COLOR = color(0, 120, 10);
+  color YELLOW_COLOR = color(190, 180, 0);
+  color BRIGHT_ORANGE_COLOR = color(254,204,92);
+  color DARK_ORANGE_COLOR = color(247,140,63);
+  color RED_COLOR = color(39,61,34);  // color(220, 180, 0);
+  color DARK_RED_COLOR = color(189,32,42);
+  color BROWN_COLOR = color(152,56,32); // color(100, 50, 10);
   
   IntList colorStages;
   
@@ -15,14 +18,17 @@ class Leaf {
   Leaf(float x, float y) {
     position = new PVector(x, y);
     size = new PVector(LEAF_SIZE.x, LEAF_SIZE.y);
-    color_ = GREEN_LEAF_COLOR;
+    color_ = GREEN_COLOR;
     angle = random(radians(-20), radians(20));
     
     colorStages = new IntList();
-    colorStages.append(GREEN_LEAF_COLOR);
-    colorStages.append(YELLOW_LEAF_COLOR);
-    colorStages.append(RED_LEAF_COLOR);
-    colorStages.append(BROWN_LEAF_COLOR);
+    colorStages.append(GREEN_COLOR);
+    colorStages.append(YELLOW_COLOR);
+    colorStages.append(BRIGHT_ORANGE_COLOR);
+    colorStages.append(DARK_ORANGE_COLOR);
+    colorStages.append(RED_COLOR);
+    colorStages.append(DARK_RED_COLOR);
+    colorStages.append(BROWN_COLOR);
   }
   
   void run(float treeColorVariance) {

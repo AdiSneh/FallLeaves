@@ -20,7 +20,7 @@ class Tree {
       leaves.add(new Leaf(leafX, leafY));
     }
     
-    colorVarianceRate = random(1, 2);
+    colorVarianceRate = random(5, 6);
   }
   
   void run() {
@@ -32,7 +32,7 @@ class Tree {
   }
   
   void update() {
-    colorVariance = abs(randomGaussian()) * colorVarianceRate;
+    colorVariance = abs(randomGaussian()) * colorVarianceRate;  // I think I want the inverse of Gaussian distribution because I want the fast ones to be outliers
     colorVarianceRate *= 1.005;
   }
 }
